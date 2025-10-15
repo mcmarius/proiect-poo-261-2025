@@ -2,7 +2,7 @@
 #include <array>
 
 int main() {
-    std::cout << "Hello, world, este ora 9:36!\n";
+    std::cout << "Hello, world, este ora 9:42!\n";
     std::array<int, 100> v{};
     int nr;
     std::cout << "Introduceți nr: ";
