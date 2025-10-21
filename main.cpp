@@ -1,5 +1,119 @@
 #include <iostream>
 #include <array>
+#include <ostream>
+#include <vector>
+
+class Student {
+public:
+    Student(const std::string &nume, int an, const std::vector<std::string> &restante)
+        : nume(nume),
+          an(an),
+          restante(restante) {
+    }
+
+    Student(const std::string &nume, int an)
+        : nume(nume),
+          an(an) {
+    }
+
+    Student(const Student &other)
+        : nume(other.nume),
+          an(other.an),
+          restante(other.restante) {
+        std::cout << "cc student " << nume << std::endl;
+    }
+
+    Student &operator=(const Student &other) {
+        if (this == &other)
+            return *this;
+        nume = other.nume;
+        an = other.an;
+        restante = other.restante;
+        return *this;
+    }
+
+    ~Student() {
+        std::cout << "destr student " << nume << std::endl;
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const Student &student) {
+        os
+                << "nume: " << student.nume
+                << " an: " << student.an
+                << " restante: ";
+        for (const auto &restanta: student.restante) {
+            os << restanta << ", ";
+        }
+        return os;
+    }
+
+private:
+    std::string nume;
+    int an;
+    std::vector<std::string> restante;
+};
+
+class Sala {
+    int nr{};
+    int cabluri_hdmi_functionale{};
+
+public:
+    [[nodiscard]] int get_nr() const {
+        return nr;
+    }
+
+    void set_nr(int nr) {
+        this->nr = nr;
+    }
+
+    [[nodiscard]] int get_cabluri_hdmi_functionale() const {
+        return cabluri_hdmi_functionale;
+    }
+
+    void set_cabluri_hdmi_functionale(int cabluri_hdmi_functionale) {
+        this->cabluri_hdmi_functionale = cabluri_hdmi_functionale;
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const Sala &sala) {
+        return os
+               << "Sala nr: " << sala.nr
+               << " cabluri_hdmi_functionale: " << sala.cabluri_hdmi_functionale;
+    }
+};
+
+class Facultate {
+    std::string nume;
+    std::vector<Sala> sali;
+    std::vector<Student> studenti;
+
+public:
+    explicit Facultate(const std::string &nume)
+        : nume(nume) {
+    }
+
+    [[nodiscard]] const std::string &get_nume() const {
+        return nume;
+    }
+
+    void set_nume(const std::string &nume) {
+        this->nume = nume;
+        get_nume();
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const Facultate &facultate) {
+        os
+                << "nume: " << facultate.nume << " sali: ";
+        for (const auto &sala: facultate.sali) {
+            os << sala << ", ";
+        }
+        os << " studenti: ";
+        for (const auto &student: facultate.studenti) {
+            os << student << ", ";
+        }
+        return os;
+    }
+};
+
 
 int main() {
     std::cout << "Hello, world, este ora 9:42!\n";
@@ -28,13 +142,13 @@ int main() {
     /////////////////////////////////////////////////////////////////////////
     std::cin >> nr;
     /////////////////////////////////////////////////////////////////////////
-    for(int i = 0; i < nr; ++i) {
+    for (int i = 0; i < nr; ++i) {
         std::cout << "v[" << i << "] = ";
         std::cin >> v[i];
     }
     std::cout << "\n\n";
     std::cout << "Am citit de la tastatură " << nr << " elemente:\n";
-    for(int i = 0; i < nr; ++i) {
+    for (int i = 0; i < nr; ++i) {
         std::cout << "- " << v[i] << "\n";
     }
     ///////////////////////////////////////////////////////////////////////////
