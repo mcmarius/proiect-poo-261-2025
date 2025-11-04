@@ -19,10 +19,6 @@ class Facultate {
 public:
     explicit Facultate(const std::string &nume);
 
-    [[nodiscard]] const std::string &get_nume() const;
-
-    void set_nume(const std::string &nume);
-
     friend std::ostream &operator<<(std::ostream &os, const Facultate &facultate);
 };
 

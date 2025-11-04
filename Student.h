@@ -11,10 +11,15 @@
 class Student {
 public:
     Student(const std::string &nume, int an, const std::vector<std::string> &restante);
+
     Student(const std::string &nume, int an);
+
     Student(const Student &other);
+
     Student &operator=(const Student &other);
+
     ~Student();
+
     friend std::ostream &operator<<(std::ostream &os, const Student &student);
 
 private:
@@ -22,7 +27,6 @@ private:
     int an;
     std::vector<std::string> restante;
 };
-
 
 
 #endif //OOP_STUDENT_H

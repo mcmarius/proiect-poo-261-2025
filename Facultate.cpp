@@ -8,14 +8,6 @@
 Facultate::Facultate(const std::string &nume) : nume(nume) {
 }
 
-const std::string &Facultate::get_nume() const {
-    return nume;
-}
-
-void Facultate::set_nume(const std::string &nume) {
-    this->nume = nume;
-}
-
 std::ostream &operator<<(std::ostream &os, const Facultate &facultate) {
     os
             << "nume: " << facultate.nume << " sali: ";
